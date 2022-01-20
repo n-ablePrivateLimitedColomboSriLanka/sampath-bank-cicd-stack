@@ -2,7 +2,7 @@ version: "3"
 
 services:
   sonarqube:
-    image: mc1arke/sonarqube-with-community-branch-plugin:lts
+    image: sonarqube:lts
     depends_on:
       - db
     environment:
@@ -12,9 +12,12 @@ services:
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_logs:/opt/sonarqube/logs
-      # - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_extensions:/opt/sonarqube/extensions
+    networks:
+      - ci-network
     ports:
-      - "9000:9000"
+      - "8443:9000"
+
   db:
     image: postgres:12
     environment:
@@ -23,7 +26,12 @@ services:
     volumes:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - ci-network
 
+networks:
+  ci-network:
+    name: ci-network
 volumes:
   sonarqube_data:
   sonarqube_extensions:
