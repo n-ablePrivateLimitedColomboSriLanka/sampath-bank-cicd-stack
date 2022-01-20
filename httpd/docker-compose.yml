@@ -2,8 +2,14 @@ version: "3"
 
 services:
   httpd:
-    image: httpd:2.4
+    image: ireshmm/ci-reverse-proxy:0.0.1
     volumes:
       - certbot-certs:/usr/local/apache2/keys
     ports:
       - "80:80"
+      - "443:443"
+
+volumes:
+  certbot-certs:
+    external: true
+    name: certbot-certs
