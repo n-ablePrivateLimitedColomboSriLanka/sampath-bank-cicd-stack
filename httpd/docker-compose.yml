@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  httpd:
+    image: httpd:2.4
+    volumes:
+      - certbot-certs:/usr/local/apache2/keys
+    ports:
+      - "80:80"
