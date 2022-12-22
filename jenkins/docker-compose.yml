@@ -1,12 +1,35 @@
-version: "3"
+version: "3.9"
 
 services:
   jenkins:
-    image: jenkins/jenkins:lts-jdk11
+    build: .
+    image: ireshmm/jenkins:lts-jdk11-jsac
     volumes:
       - jenkins-data:/var/jenkins_home
+    networks:
+      - ci-network
     ports:
       - "8080:8080"
+    secrets:
+      - github-app-id
+      - github-app-privkey
+      - nexus-user-id
+      - nexus-user-password
+      - generic-webhook-token
 
+networks:
+  ci-network:
+    name: ci-network
 volumes:
   jenkins-data:
+secrets:
+  github-app-id:
+    file: ../secrets/github-app-id
+  github-app-privkey:
+    file: ../secrets/github-app-privkey
+  nexus-user-id:
+    file: ../secrets/nexus-jenkins-user-id
+  nexus-user-password:
+    file: ../secrets/nexus-jenkins-user-password
+  generic-webhook-token:
+    file: ../secrets/generic-webhook-token

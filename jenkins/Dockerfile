@@ -1,3 +1,6 @@
-FROM jenkins/jenkins:2.319.2-jdk11
-USER jenkins
-RUN jenkins-plugin-cli --plugins "blueocean:1.25.2"
+FROM jenkins/jenkins:lts-jdk11
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+ENV CASC_JENKINS_CONFIG /usr/share/jenkins/ref/casc_configs/casc.yaml
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli --latest --plugin-file /usr/share/jenkins/ref/plugins.txt
+COPY casc.yaml /usr/share/jenkins/ref/casc_configs/casc.yaml

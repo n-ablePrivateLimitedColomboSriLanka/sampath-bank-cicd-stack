@@ -1,0 +1,49 @@
+core:
+  baseUrl: ${BASE_URL:""}
+
+repository:
+  repositories:
+    - name: maven-java-releases
+      online: true
+      recipeName: maven2-hosted
+      attributes:
+        maven:
+          versionPolicy: RELEASE
+          layoutPolicy: STRICT
+        storage:
+          writePolicy: ALLOW_ONCE
+          strictContentTypeValidation: true
+          blobStoreName: default
+
+security:
+  anonymousAccess: false
+  pruneUsers: false
+  privileges:
+    - id: nx-repository-view-maven-java-releases-all
+      enabled: true
+      name: nx-repository-view-maven-java-releases-*
+      description: Privilege to deploy to the maven-java-releases repository
+      type: repository-view
+      properties:
+        format: maven2
+        repository: maven-java-releases
+        actions: '*'
+  roles:
+    - id: nx-jenkins
+      enabled: true
+      source: default
+      name: Jenkins role
+      description: Jenkins role with deploy permission to set of repositories
+      privileges:
+        - nx-repository-view-maven-java-releases-all
+  users:
+    - username: ${file:/run/secrets/nexus-jenkins-user-id}
+      firstName: Jenkins
+      lastName: Server
+      password: ${file:/run/secrets/nexus-jenkins-user-password}
+      updateExistingPassword: false
+      email: iresh@n-able.biz
+      roles:
+        - source: "default"
+          role: nx-jenkins
+
