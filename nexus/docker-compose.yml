@@ -11,7 +11,7 @@ services:
     ports:
       - "8081:80"
     environment:
-      BASE_URL: 'http://localhost:8081/'
+      BASE_URL: 'http://nexus.nableintegration.ml'
       NEXUS_CASC_CONFIG: '/opt/nexus.yml'
     ulimits:
       nofile:
