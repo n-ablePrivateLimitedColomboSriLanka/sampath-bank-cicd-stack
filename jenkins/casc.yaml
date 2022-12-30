@@ -5,7 +5,7 @@ credentials:
       - gitHubApp:
           appID: ${readFile:/run/secrets/github-app-id}
           id: "jenkins_github_app"
-          privateKey: ${readFile:/run/secrets/github-app-privkey.pem}
+          privateKey: ${readFile:/run/secrets/github-app-privkey}
       - usernamePassword:
           description: "nexus-credentials"
           id: "nexus-credentials"

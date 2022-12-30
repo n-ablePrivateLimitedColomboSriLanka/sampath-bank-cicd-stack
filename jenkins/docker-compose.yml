@@ -13,9 +13,10 @@ services:
     secrets:
       - github-app-id
       - github-app-privkey
-      - nexus-user-id
-      - nexus-user-password
+      - nexus-jenkins-user-id
+      - nexus-jenkins-user-password
       - generic-webhook-token
+      - jenkins-admin-password
 
 networks:
   ci-network:
@@ -27,9 +28,11 @@ secrets:
     file: ../secrets/github-app-id
   github-app-privkey:
     file: ../secrets/github-app-privkey
-  nexus-user-id:
+  nexus-jenkins-user-id:
     file: ../secrets/nexus-jenkins-user-id
-  nexus-user-password:
+  nexus-jenkins-user-password:
     file: ../secrets/nexus-jenkins-user-password
+  jenkins-admin-password:
+    file: ../secrets/jenkins-admin-password
   generic-webhook-token:
     file: ../secrets/generic-webhook-token
