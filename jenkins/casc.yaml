@@ -48,7 +48,7 @@ security:
 unclassified:
   location:
     adminAddress: "address not configured yet <nobody@nowhere>"
-    url: "http://jenkins:8080/"
+    url: "${JENKINS_URL}"
   gitHubPluginConfig:
     configs:
     - name: "GitHub"

@@ -10,6 +10,8 @@ services:
       - ci-network
     ports:
       - "8080:8080"
+    environment:
+      JENKINS_URL: "https://jenkins.nableintegration.ml/"
     secrets:
       - github-app-id
       - github-app-privkey
