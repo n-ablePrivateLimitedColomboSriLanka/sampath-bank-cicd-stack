@@ -28,8 +28,8 @@ pipelineJob('JobCreator') {
                 expressionType('JSONPath')
               }
               genericVariable {
-                key('action')
-                value('$.action')
+                key('before')
+                value('$.before')
                 expressionType('JSONPath')
               }
             }
@@ -40,8 +40,8 @@ pipelineJob('JobCreator') {
               }
             }
             causeString('Github Repository Created')
-            regexpFilterExpression('repository:created')
-            regexpFilterText('$x_github_event:$action')
+            regexpFilterExpression('push:0000000000000000000000000000000000000000')
+            regexpFilterText('$x_github_event:$before')
             tokenCredentialId('generic_webhook_token')
           }
         }
