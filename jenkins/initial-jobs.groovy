@@ -1,7 +1,7 @@
 def github_project_url = 'https://github.com/nable-integration-cicd-dev-mirror/JenkinsJobDSL.git'
 pipelineJob('JobCreator') {
   parameters {
-	stringParam('job_name', '', 'Name of the job being generated')
+	stringParam('repository_name', '', 'Name of the job being generated - equals to the repository name')
 	stringParam('artifact_repo_url', 'http://nexus/repository/maven-java-releases/', 'Repository where the artifacat will be published to')
 	stringParam('trunk_branch', 'master', 'The trunk branch to which feature branches are merged to')
   }
@@ -23,7 +23,7 @@ pipelineJob('JobCreator') {
                 expressionType('JSONPath')
               }
               genericVariable {
-                key('job_name')
+                key('repository_name')
                 value('$.repository.name')
                 expressionType('JSONPath')
               }
