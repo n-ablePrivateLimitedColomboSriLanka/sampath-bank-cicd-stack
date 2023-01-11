@@ -79,6 +79,19 @@ unclassified:
                      </mirror>
                 </mirrors>
             </settings>
+    - json:
+        comment: "Maven artfiact repositories"
+        id: "maven-artifact-repositories"
+        name: "maven-artifact-repositories"
+        content: |
+          {
+            "repositories": [
+              {
+                "url": "http://nexus/repository/maven-java-releases/",
+                "id": "nexus"
+              }
+            ]
+          }
   globalLibraries:
     libraries:
     - defaultVersion: "master"
