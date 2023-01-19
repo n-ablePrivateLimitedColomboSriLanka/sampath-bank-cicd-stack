@@ -4,7 +4,7 @@ credentials:
     - credentials:
       - gitHubApp:
           appID: ${readFile:/run/secrets/github-app-id}
-          id: "jenkins_github_app"
+          id: "${GITHUB_APP_CRED_ID}"
           privateKey: ${readFile:/run/secrets/github-app-privkey}
       - usernamePassword:
           description: "nexus-credentials"
@@ -17,6 +17,21 @@ credentials:
           scope: GLOBAL
           secret: ${readFile:/run/secrets/generic-webhook-token}
 jenkins:
+  globalNodeProperties:
+    - envVars:
+        env:
+        - key: "GITHUB_ORG_NAME"
+          value: "${GITHUB_ORG_NAME}"
+        - key: "GITHUB_APP_CRED_ID"
+          value: "${GITHUB_APP_CRED_ID}"
+        - key: "JOB_CREATOR_DSL_REPO"
+          value: "${JOB_CREATOR_DSL_REPO}"
+        - key: "SHARED_LIB_REPO"
+          value: "${SHARED_LIB_REPO}"
+        - key: "BUILD_SCRIPTS_REPO"
+          value: "${BUILD_SCRIPTS_REPO}"
+        - key: "ACE_SHARED_LIB_INDEX_URL"
+          value: "${ACE_SHARED_LIB_INDEX_URL}"
   clouds:
     - docker:
         name: "docker"
@@ -121,10 +136,10 @@ unclassified:
           scm:
             github:
               configuredByUrl: true
-              credentialsId: "jenkins_github_app"
-              repoOwner: "nable-integration-cicd-dev-mirror"
+              credentialsId: "${GITHUB_APP_CRED_ID}"
+              repoOwner: "${GITHUB_ORG_NAME}"
               repository: "JenkinsLibs"
-              repositoryUrl: "https://github.com/nable-integration-cicd-dev-mirror/JenkinsLibs.git"
+              repositoryUrl: "${SHARED_LIB_REPO}"
               traits:
               - gitHubBranchDiscovery:
                   strategyId: 1

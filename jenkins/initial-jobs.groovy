@@ -1,3 +1,5 @@
+def github_project_url = JOB_CREATOR_DSL_REPO
+
 listView('Java') {
     description('All Java Projects')
 	jobFilters {
@@ -38,12 +40,15 @@ listView('ACE') {
     }
 }
 
-def github_project_url = 'https://github.com/nable-integration-cicd-dev-mirror/JenkinsJobDSL.git'
 pipelineJob('JobCreator') {
   parameters {
 	stringParam('repository_name', '', 'Name of the job being generated - equals to the repository name')
 	stringParam('trunk_branch', 'master', 'The trunk branch to which feature branches are merged to')
 	stringParam('x_github_event', 'none', 'Do not edit the default value')
+	stringParam('github_app_cred_id', GITHUB_APP_CRED_ID, 'Do not edit the default value')
+	stringParam('github_org_name', GITHUB_ORG_NAME, 'Do not edit the default value')
+	stringParam('build_scripts_repo', BUILD_SCRIPTS_REPO, 'Do not edit the default value')
+	stringParam('ace_shared_lib_index_url', ACE_SHARED_LIB_INDEX_URL, 'Do not edit the default value')
   }
   properties {
     githubProjectUrl(github_project_url)
@@ -100,7 +105,7 @@ pipelineJob('JobCreator') {
         git {
           remote {
             url(github_project_url)
-            credentials('jenkins_github_app')
+            credentials(GITHUB_APP_CRED_ID)
           }
           branch('*/master')
         }
