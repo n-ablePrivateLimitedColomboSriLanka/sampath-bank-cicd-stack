@@ -21,3 +21,5 @@ config-file-provider
 pipeline-maven
 pipeline-utility-steps
 view-job-filters
+docker-plugin
+docker-workflow

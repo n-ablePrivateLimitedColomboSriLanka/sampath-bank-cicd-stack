@@ -12,6 +12,10 @@ services:
       - "8080:8080"
     environment:
       JENKINS_URL: "https://jenkins.nableintegration.ml/"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+    group_add:
+      - '999'
     secrets:
       - github-app-id
       - github-app-privkey

@@ -17,6 +17,12 @@ credentials:
           scope: GLOBAL
           secret: ${readFile:/run/secrets/generic-webhook-token}
 jenkins:
+  clouds:
+    - docker:
+        name: "docker"
+        dockerApi:
+          dockerHost:
+            uri: "unix:///var/run/docker.sock"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
