@@ -1,3 +1,43 @@
+listView('Java') {
+    description('All Java Projects')
+	jobFilters {
+        regex {
+            matchType(MatchType.INCLUDE_MATCHED)
+            matchValue(RegexMatchValue.DESCRIPTION)
+            regex('.*labels:.*java.*')
+        }
+    }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
+    }
+}
+
+listView('ACE') {
+    description('All AppConnect Enterprise Projects')
+	jobFilters {
+        regex {
+            matchType(MatchType.INCLUDE_MATCHED)
+            matchValue(RegexMatchValue.DESCRIPTION)
+            regex('.*labels:.*ace.*')
+        }
+    }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
+    }
+}
+
 def github_project_url = 'https://github.com/nable-integration-cicd-dev-mirror/JenkinsJobDSL.git'
 pipelineJob('JobCreator') {
   parameters {
