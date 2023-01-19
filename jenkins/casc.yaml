@@ -86,9 +86,22 @@ unclassified:
                 </mirrors>
             </settings>
     - json:
-        comment: "Maven artfiact repositories"
-        id: "maven-artifact-repositories"
-        name: "maven-artifact-repositories"
+        comment: "Maven ace artfiact repositories"
+        id: "maven-ace-artifact-repositories"
+        name: "maven-ace-artifact-repositories"
+        content: |
+          {
+            "repositories": [
+              {
+                "url": "http://nexus/repository/maven-ace-releases/",
+                "id": "nexus"
+              }
+            ]
+          }
+    - json:
+        comment: "Maven java artfiact repositories"
+        id: "maven-java-artifact-repositories"
+        name: "maven-java-artifact-repositories"
         content: |
           {
             "repositories": [

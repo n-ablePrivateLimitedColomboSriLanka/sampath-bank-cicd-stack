@@ -14,6 +14,17 @@ repository:
           writePolicy: ALLOW_ONCE
           strictContentTypeValidation: true
           blobStoreName: default
+    - name: maven-ace-releases
+      online: true
+      recipeName: maven2-hosted
+      attributes:
+        maven:
+          versionPolicy: RELEASE
+          layoutPolicy: STRICT
+        storage:
+          writePolicy: ALLOW_ONCE
+          strictContentTypeValidation: true
+          blobStoreName: default
 
 security:
   anonymousAccess: false
@@ -28,6 +39,15 @@ security:
         format: maven2
         repository: maven-java-releases
         actions: '*'
+    - id: nx-repository-view-maven-ace-releases-all
+      enabled: true
+      name: nx-repository-view-maven-ace-releases-*
+      description: Privilege to deploy to the maven-ace-releases repository
+      type: repository-view
+      properties:
+        format: maven2
+        repository: maven-ace-releases
+        actions: '*'
   roles:
     - id: nx-jenkins
       enabled: true
@@ -36,6 +56,7 @@ security:
       description: Jenkins role with deploy permission to set of repositories
       privileges:
         - nx-repository-view-maven-java-releases-all
+        - nx-repository-view-maven-ace-releases-all
   users:
     - username: ${file:/run/secrets/nexus-jenkins-user-id}
       firstName: Jenkins
