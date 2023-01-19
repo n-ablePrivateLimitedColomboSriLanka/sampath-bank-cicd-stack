@@ -3,6 +3,7 @@ pipelineJob('JobCreator') {
   parameters {
 	stringParam('repository_name', '', 'Name of the job being generated - equals to the repository name')
 	stringParam('trunk_branch', 'master', 'The trunk branch to which feature branches are merged to')
+	stringParam('x_github_event', 'none', 'Do not edit the default value')
   }
   properties {
     githubProjectUrl(github_project_url)
