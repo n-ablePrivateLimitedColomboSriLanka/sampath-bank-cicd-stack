@@ -10,8 +10,8 @@ services:
       - ci-network
     ports:
       - "8081:80"
-    environment:
-      BASE_URL: 'http://nexus.nableintegration.ml'
+    env_file:
+      - .env-vars
     ulimits:
       nofile:
         soft: 65536

@@ -11,9 +11,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      DOMAIN_DNS_NAME: nableintegration.ml
-      SERVER_ADMIN_EMAIL: socialexpz1@gmail.com
+    env_file:
+      - .env-vars
 
 volumes:
   certbot-certs:
