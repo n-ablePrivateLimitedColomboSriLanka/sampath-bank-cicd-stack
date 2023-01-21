@@ -22,7 +22,6 @@ services:
       - nexus-jenkins-user-id
       - nexus-jenkins-user-password
       - generic-webhook-token
-      - jenkins-admin-password
 
 networks:
   ci-network:
@@ -38,7 +37,5 @@ secrets:
     file: ../secrets/nexus-jenkins-user-id
   nexus-jenkins-user-password:
     file: ../secrets/nexus-jenkins-user-password
-  jenkins-admin-password:
-    file: ../secrets/jenkins-admin-password
   generic-webhook-token:
     file: ../secrets/generic-webhook-token
