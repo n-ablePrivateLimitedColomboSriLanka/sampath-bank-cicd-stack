@@ -14,6 +14,7 @@ RUN ./mvnw package -Dkar.finalName=nexus-casc-plugin
 # hadolint ignore=DL3006
 FROM ${SONATYPE_IMAGE}
 ENV NEXUS_APP_PORT=80
+ENV NEXUS_CASC_CONFIG=/opt/nexus.yml
 COPY --from=BUILDER /build/target/nexus-casc-plugin-bundle.kar /opt/sonatype/nexus/deploy/nexus-casc-plugin.kar
 COPY casc.yaml /opt/nexus.yml
 USER root
