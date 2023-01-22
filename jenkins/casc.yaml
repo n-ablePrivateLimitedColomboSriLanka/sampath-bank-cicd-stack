@@ -32,6 +32,8 @@ jenkins:
           value: "${BUILD_SCRIPTS_REPO}"
         - key: "ACE_SHARED_LIB_INDEX_URL"
           value: "${ACE_SHARED_LIB_INDEX_URL}"
+        - key: "TRUNK_BRANCH_NAME"
+          value: "${TRUNK_BRANCH_NAME}"
   clouds:
     - docker:
         name: "docker"
