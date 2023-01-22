@@ -1,5 +1,25 @@
 def github_project_url = JOB_CREATOR_DSL_REPO
 
+listView('Meta') {
+    description('All Meta Jobs')
+	jobFilters {
+        regex {
+            matchType(MatchType.INCLUDE_MATCHED)
+            matchValue(RegexMatchValue.DESCRIPTION)
+            regex('.*labels:.*meta.*')
+        }
+    }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
+    }
+}
+
 listView('Java') {
     description('All Java Projects')
 	jobFilters {
@@ -41,6 +61,7 @@ listView('ACE') {
 }
 
 pipelineJob('JobCreator') {
+  description("labels:meta")
   parameters {
 	stringParam('repository_name', '', 'Name of the job being generated - equals to the repository name')
 	stringParam('trunk_branch', TRUNK_BRANCH_NAME, 'The trunk branch to which feature branches are merged to')
