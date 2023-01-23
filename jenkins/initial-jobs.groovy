@@ -63,7 +63,7 @@ listView('ACE') {
 pipelineJob('JobCreator') {
   description("labels:meta")
   parameters {
-	stringParam('repository_name', '', 'Name of the job being generated - equals to the repository name')
+	stringParam('repository_clone_url', '', 'Clone URL of a specific repository to be processed, leave blank for all repositories')
 	stringParam('trunk_branch', TRUNK_BRANCH_NAME, 'The trunk branch to which feature branches are merged to')
 	stringParam('x_github_event', 'none', 'Do not edit the default value')
 	stringParam('github_app_cred_id', GITHUB_APP_CRED_ID, 'Do not edit the default value')
