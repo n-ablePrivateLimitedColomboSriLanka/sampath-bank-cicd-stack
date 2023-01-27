@@ -87,21 +87,39 @@ unclassified:
         serverCredentialMappings:
         - credentialsId: "nexus-credentials"
           serverId: "nexus"
+        - credentialsId: "${GITHUB_APP_CRED_ID}"
+          serverId: "github"
         content: |
             <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                                   https://maven.apache.org/xsd/settings-1.0.0.xsd">
-                 <mirrors>
-                      <mirror>
-                           <id>maven-default-http-blocker</id>
-                           <mirrorOf>dummy</mirrorOf>
-                           <name>Dummy mirror to override default blocking mirror that blocks http</name>
-                           <url>http://0.0.0.0/</url>
-                           <blocked>true</blocked>
-                     </mirror>
-                </mirrors>
+              <mirrors>
+                <mirror>
+                  <id>maven-default-http-blocker</id>
+                  <mirrorOf>dummy</mirrorOf>
+                  <name>Dummy mirror to override default blocking mirror that blocks http</name>
+                  <url>http://0.0.0.0/</url>
+                  <blocked>true</blocked>
+                </mirror>
+              </mirrors>
+              <profiles>
+                <profile>
+                  <id>default</id>
+                  <repositories>
+                    <repository>
+                      <id>nexus</id>
+                      <name>maven-java-releases-nexus</name>
+                      <url>http://nexus/repository/maven-java-releases/</url>
+                    </repository>
+                  </repositories>
+                </profile>
+              </profiles>
+              <activeProfiles>
+                <activeProfile>default</activeProfile>
+              </activeProfiles>
             </settings>
+
     - json:
         comment: "Maven ace artfiact repositories"
         id: "maven-ace-artifact-repositories"
