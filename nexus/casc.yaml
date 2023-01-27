@@ -49,6 +49,16 @@ security:
         repository: maven-ace-releases
         actions: '*'
   roles:
+    - id: nx-java-ace-release-reader
+      enabled: true
+      source: default
+      name: Release reader role
+      description: The role for reading java and ace release artifacts
+      privileges:
+        - nx-repository-view-maven2-maven-java-releases-browse
+        - nx-repository-view-maven2-maven-java-releases-read
+        - nx-repository-view-maven2-maven-ace-releases-browse
+        - nx-repository-view-maven2-maven-ace-releases-read
     - id: nx-jenkins
       enabled: true
       source: default
@@ -67,4 +77,13 @@ security:
       roles:
         - source: "default"
           role: nx-jenkins
+    - username: release-reader
+      firstName: Release
+      lastName: Reader
+      password: ${file:/run/secrets/nexus-realease-reader-user-password}
+      updateExistingPassword: false
+      email: releasereader@nexus
+      roles:
+        - source: "default"
+          role: nx-java-ace-release-reader
 

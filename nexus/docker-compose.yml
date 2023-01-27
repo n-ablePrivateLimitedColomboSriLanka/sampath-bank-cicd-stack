@@ -19,6 +19,7 @@ services:
     secrets:
       - nexus-jenkins-user-id
       - nexus-jenkins-user-password
+      - nexus-realease-reader-user-password
 
 networks:
   ci-network:
@@ -31,3 +32,5 @@ secrets:
     file: ../secrets/nexus-jenkins-user-id
   nexus-jenkins-user-password:
     file: ../secrets/nexus-jenkins-user-password
+  nexus-realease-reader-user-password:
+    file: ../secrets/nexus-realease-reader-user-password
