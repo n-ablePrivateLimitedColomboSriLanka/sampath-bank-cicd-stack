@@ -20,6 +20,8 @@ services:
       - nexus-jenkins-user-id
       - nexus-jenkins-user-password
       - nexus-realease-reader-user-password
+    environment:
+      TZ: "Asia/Colombo"
 
 networks:
   ci-network:

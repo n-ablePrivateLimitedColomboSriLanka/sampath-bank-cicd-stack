@@ -21,6 +21,8 @@ services:
       - nexus-jenkins-user-id
       - nexus-jenkins-user-password
       - generic-webhook-token
+    environment:
+      TZ: "Asia/Colombo"
 
 networks:
   ci-network:

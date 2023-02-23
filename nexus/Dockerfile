@@ -19,4 +19,5 @@ COPY --from=BUILDER /build/target/nexus-casc-plugin-bundle.kar /opt/sonatype/nex
 COPY casc.yaml /opt/nexus.yml
 USER root
 RUN sed -i -e 's/\(^application-port=\).*$/\1'"${NEXUS_APP_PORT}/" /opt/sonatype/nexus/etc/nexus-default.properties
+RUN microdnf reinstall tzdata -y
 USER nexus
