@@ -1,13 +1,11 @@
 ARG SONATYPE_IMAGE=sonatype/nexus3:latest
 ARG CASC_PLUGIN_GIT_URL=https://github.com/AdaptiveConsulting/nexus-casc-plugin.git
 
-FROM bitnami/git:latest as GIT_CLONER
-ARG CASC_PLUGIN_GIT_URL
-WORKDIR /build
-RUN git clone $CASC_PLUGIN_GIT_URL .
 
 FROM openjdk:8-jdk-alpine as BUILDER
-COPY --from=GIT_CLONER "/build" "/build"
+RUN apk add git
+ARG CASC_PLUGIN_GIT_URL
+RUN git clone $CASC_PLUGIN_GIT_URL /build
 WORKDIR "/build"
 RUN ./mvnw package -Dkar.finalName=nexus-casc-plugin
 
