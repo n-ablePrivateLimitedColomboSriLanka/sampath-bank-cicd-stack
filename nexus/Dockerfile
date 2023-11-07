@@ -1,6 +1,7 @@
 ARG SONATYPE_IMAGE=sonatype/nexus3:latest
 ARG CASC_PLUGIN_GIT_URL=https://github.com/AdaptiveConsulting/nexus-casc-plugin.git
 
+
 FROM openjdk:8-jdk-alpine as BUILDER
 RUN apk add git
 ARG CASC_PLUGIN_GIT_URL
