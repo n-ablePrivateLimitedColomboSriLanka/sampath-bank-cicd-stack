@@ -1,6 +1,6 @@
 FROM docker:latest as docker-client
 
-FROM jenkins/jenkins:lts-jdk11
+FROM jenkins/jenkins:lts-jdk17
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV CASC_JENKINS_CONFIG /usr/share/jenkins/ref/casc_configs/casc.yaml
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
