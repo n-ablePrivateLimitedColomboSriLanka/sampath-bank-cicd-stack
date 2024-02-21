@@ -1,7 +1,14 @@
 version: '3.9'
 services:
   dockerc:
-    image: mcr.microsoft.com/devcontainers/base:bullseye
+    build: dockerc
+    image: ireshmm/dockerc
     command: sleep infinity
     volumes:
       - ../:/workspace:cached
+      - jenkins-data:/jenkins-data
+
+volumes:
+  jenkins-data:
+    name: nable-ci-stack_jenkins-data
+    external: true

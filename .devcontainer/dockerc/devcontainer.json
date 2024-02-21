@@ -4,14 +4,26 @@
 	"service": "dockerc",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+			"moby": true,
+			"installDockerBuildx": true,
 			"version": "latest",
-			"enableNonRootDocker": "true",
-			"moby": "false"
+			"dockerDashComposeVersion": "none"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"installDirectlyFromGitHubRelease": true,
+			"version": "latest"
 		}
 	},
 	"shutdownAction": "none",
 	"workspaceFolder": "/workspace",
 	"remoteEnv": {
 		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"/jenkins-jack-1.2.1.vsix"
+			]
+		}
 	}
 }
