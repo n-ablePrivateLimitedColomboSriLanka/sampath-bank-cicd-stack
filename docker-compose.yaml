@@ -1,4 +1,4 @@
-version: "3"
+# version: "3"
 
 services:
   jenkins:
@@ -11,8 +11,6 @@ services:
       - ci-network
     ports:
       - "8080:8080"
-    env_file:
-      - .env-vars
     group_add:
       - '999'
     secrets:
