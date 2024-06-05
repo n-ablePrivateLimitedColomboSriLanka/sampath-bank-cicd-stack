@@ -10,14 +10,20 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      TZ: "${TZ}"
+      DOMAIN_DNS_NAME: "${DOMAIN_DNS_NAME}"
+      SERVER_ADMIN_EMAIL: "${SERVER_ADMIN_EMAIL}"
 
   # Jenkins
   jenkins:
     build: jenkins
-    image: icr.io/n-able/jenkins:lts-jdk11-jsac
+    image: icr.io/n-able/jenkins:lts-jdk17-jsac
     volumes:
       - jenkins-data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock:rw
+      - ./jenkins/casc.yaml:${CASC_JENKINS_CONFIG}
+      - ./jenkins/initial-jobs.groovy:${INITIAL_JOB_DSL_FILE}
     networks:
       - ci-network
     ports:
@@ -28,18 +34,32 @@ services:
       - github-app-id
       - github-app-privkey
       - generic-webhook-token
+      - nexus-jenkins-user-id
+      - nexus-jenkins-user-password
     environment:
-      TZ: "Asia/Colombo"
+      JENKINS_URL: "${JENKINS_URL}"
+      GITHUB_ORG_NAME: "${GITHUB_ORG_NAME}"
+      GITHUB_APP_CRED_ID: "${GITHUB_APP_CRED_ID}"
+      JOB_CREATOR_DSL_REPO: "${JOB_CREATOR_DSL_REPO}"
+      SHARED_LIB_REPO: "${SHARED_LIB_REPO}"
+      BUILD_SCRIPTS_REPO: "${BUILD_SCRIPTS_REPO}"
+      ACE_SHARED_LIB_INDEX_URL: "${ACE_SHARED_LIB_INDEX_URL}"
+      TRUNK_BRANCH_NAME: "${TRUNK_BRANCH_NAME}"
+      TZ: "${TZ}"
+      CASC_JENKINS_CONFIG: "${CASC_JENKINS_CONFIG}"
+      INITIAL_JOB_DSL_FILE: "${INITIAL_JOB_DSL_FILE}"
   
   # SonarQube
   sonarqube:
     image: sonarqube:lts
+    command: -Dsonar.core.serverBaseURL=\'${SONARQUBE_URL}\'
     depends_on:
       - db
     environment:
       SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
       SONAR_JDBC_USERNAME: sonar
       SONAR_JDBC_PASSWORD: sonar
+      SERVER_BASE_URL: "${SONARQUBE_URL}"
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_logs:/opt/sonarqube/logs
@@ -48,6 +68,9 @@ services:
       - ci-network
     ports:
       - "8443:9000"
+    ulimits:
+      nofile: 131072
+      nproc: 8192
   db:
     image: postgres:12
     environment:
@@ -65,6 +88,7 @@ services:
     image: icr.io/n-able/nexus:latest-casc
     volumes:
       - nexus-data:/nexus-data
+      - ./nexus/casc.yaml:${NEXUS_CASC_CONFIG}
     networks:
       - ci-network
     ports:
@@ -76,11 +100,12 @@ services:
     secrets:
       - nexus-jenkins-user-id
       - nexus-jenkins-user-password
-      - nexus-realease-reader-user-password
+      - nexus-release-reader-user-password
     environment:
-      TZ: "Asia/Colombo"
-  
-
+      BASE_URL: "${NEXUS_URL}"
+      TZ: "${TZ}"
+      NEXUS_CASC_CONFIG: "${NEXUS_CASC_CONFIG}"
+      
 networks:
   ci-network:
     name: ci-network
@@ -111,5 +136,5 @@ secrets:
     file: secrets/nexus-jenkins-user-id
   nexus-jenkins-user-password:
     file: secrets/nexus-jenkins-user-password
-  nexus-realease-reader-user-password:
-    file: secrets/nexus-realease-reader-user-password
+  nexus-release-reader-user-password:
+    file: secrets/nexus-release-reader-user-password

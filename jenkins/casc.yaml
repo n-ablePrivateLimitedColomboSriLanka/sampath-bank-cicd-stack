@@ -70,7 +70,7 @@ security:
     useScriptSecurity: false
 unclassified:
   location:
-    adminAddress: "address not configured yet <nobody@nowhere>"
+    adminAddress: iresh@n-able.biz
     url: "${JENKINS_URL}"
   gitHubPluginConfig:
     configs:
@@ -180,4 +180,4 @@ tool:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
 jobs:
-  - file: /usr/share/jenkins/ref/initial-jobs/initial-jobs.groovy
+  - file: "${INITIAL_JOB_DSL_FILE}"
