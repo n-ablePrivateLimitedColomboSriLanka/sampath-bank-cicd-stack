@@ -1,62 +1,32 @@
 def github_project_url = JOB_CREATOR_DSL_REPO
 
-listView('Meta') {
-    description('All Meta Jobs')
-	jobFilters {
-        regex {
-            matchType(MatchType.INCLUDE_MATCHED)
-            matchValue(RegexMatchValue.DESCRIPTION)
-            regex('.*labels:.*meta.*')
-        }
-    }
-    columns {
-        status()
-        weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
-    }
-}
+def views = [
+    'Meta': ['regex': '.*labels:.*meta.*', 'description': 'All Meta Jobs'],
+    'Java': ['regex': '.*labels:.*java.*', 'description': 'All Java Projects'],
+    'IBMAppConnect': ['regex': '.*labels:.*ace.*', 'description': 'All AppConnect Enterprise Projects']
+]
 
-listView('Java') {
-    description('All Java Projects')
-	jobFilters {
-        regex {
-            matchType(MatchType.INCLUDE_MATCHED)
-            matchValue(RegexMatchValue.DESCRIPTION)
-            regex('.*labels:.*java.*')
+for (viewEntry in views) {
+    viewName = viewEntry.key
+    viewConfig = viewEntry.value
+    listView(viewName) {
+        description(viewConfig['description'])
+        jobFilters {
+            regex {
+                matchType(MatchType.INCLUDE_MATCHED)
+                matchValue(RegexMatchValue.DESCRIPTION)
+                regex(viewConfig['regex'])
+            }
         }
-    }
-    columns {
-        status()
-        weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
-    }
-}
-
-listView('ACE') {
-    description('All AppConnect Enterprise Projects')
-	jobFilters {
-        regex {
-            matchType(MatchType.INCLUDE_MATCHED)
-            matchValue(RegexMatchValue.DESCRIPTION)
-            regex('.*labels:.*ace.*')
+        columns {
+            status()
+            weather()
+            name()
+            lastSuccess()
+            lastFailure()
+            lastDuration()
+            buildButton()
         }
-    }
-    columns {
-        status()
-        weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
     }
 }
 
