@@ -1,3 +1,4 @@
+name: sampath-bank-cicd-stack
 services:
   # HTTPD
   httpd:
@@ -29,7 +30,7 @@ services:
     ports:
       - "8080:8080"
     group_add:
-      - '999'
+      - '988'
     secrets:
       - github-app-id
       - github-app-privkey
