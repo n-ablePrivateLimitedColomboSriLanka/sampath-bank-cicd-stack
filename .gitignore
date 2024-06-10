@@ -1,3 +1,4 @@
 secrets/*
 !secrets/gen-secrets.sh
 .env.prod
+ephemeral_files
