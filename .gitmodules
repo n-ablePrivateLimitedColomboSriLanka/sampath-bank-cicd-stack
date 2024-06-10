@@ -1,0 +1,8 @@
+[submodule "JenkinsLibs"]
+	path = modules/JenkinsLibs
+	url = https://github.com/n-ablePrivateLimitedColomboSriLanka/JenkinsLibs.git
+	branch = master
+[submodule "JenkinsJobDSL"]
+	path = modules/JenkinsJobDSL
+	url = https://github.com/n-ablePrivateLimitedColomboSriLanka/JenkinsJobDSL.git
+	branch = master
