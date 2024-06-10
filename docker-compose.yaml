@@ -51,8 +51,7 @@ services:
   
   # SonarQube
   sonarqube:
-    image: sonarqube:lts
-    command: -Dsonar.core.serverBaseURL=\'${SONARQUBE_URL}\'
+    image: mc1arke/sonarqube-with-community-branch-plugin:lts
     depends_on:
       - db
     environment:
